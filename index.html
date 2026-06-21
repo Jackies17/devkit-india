@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevKit India — Free Offline-First Developer & Freelancer Tools</title>
+  <meta name="description" content="Free, browser-based, offline-capable developer toolkit for Indian freelancers, developers, and small business owners. GST Invoice Calculator, PDF Merger, Resume Builder, and JSON Formatter. No login required.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Tabler Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/tabler-icons.min.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <span class="logo-dev">DevKit</span><span class="logo-india">India</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#pdf-resume-tool">Resume & PDF</a></li>
+        <li><a href="#gst-calculator-tool">GST Calculator</a></li>
+        <li><a href="#json-formatter-tool">JSON Formatter</a></li>
+        <li><a href="https://github.com" target="_blank" rel="noopener noreferrer"><i class="ti ti-brand-github"></i> GitHub</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#pdf-resume-tool" class="btn btn-primary">Try Free</a>
+      </div>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+        <i class="ti ti-menu-2"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="hero container">
+    <h1 class="hero-headline animate-hero-headline">
+      Build. Calculate. Format.<br>
+      <span class="gradient-text">All Free.</span>
+    </h1>
+    <p class="hero-subheadline animate-subheadline">
+      Made for India — GST-ready invoices, INR support, zero subscriptions. No login, no fuss.
+    </p>
+    
+    <div class="hero-cards-grid">
+      <!-- Card 1 -->
+      <a href="#pdf-resume-tool" class="devkit-card animate-card-1">
+        <div class="card-icon indigo">
+          <i class="ti ti-file-text"></i>
+        </div>
+        <h3 class="card-title text-primary">Resume & PDF</h3>
+        <p class="card-desc">Create professional resumes and merge PDF files in seconds, completely client-side.</p>
+        <span class="card-link indigo">Export to PDF <i class="ti ti-arrow-up-right"></i></span>
+      </a>
+      
+      <!-- Card 2 -->
+      <a href="#gst-calculator-tool" class="devkit-card animate-card-2">
+        <div class="card-icon saffron">
+          <i class="ti ti-receipt"></i>
+        </div>
+        <h3 class="card-title text-primary">GST Calculator</h3>
+        <p class="card-desc">Calculate CGST, SGST, and IGST details, generate professional invoices formatted in INR.</p>
+        <span class="card-badge">GST + INR ready</span>
+      </a>
+      
+      <!-- Card 3 -->
+      <a href="#json-formatter-tool" class="devkit-card animate-card-3">
+        <div class="card-icon indigo">
+          <i class="ti ti-code"></i>
+        </div>
+        <h3 class="card-title text-primary">JSON Formatter</h3>
+        <p class="card-desc">Format, minify, validate, and syntax highlight your JSON string offline instantly.</p>
+        <span class="card-label">Format · Minify · Validate</span>
+      </a>
+    </div>
+
+    <!-- Trust Badges Row -->
+    <div class="trust-badges-row animate-trust-badges">
+      <div class="trust-badge"><span>✦</span> No login required</div>
+      <div class="trust-badge"><span>✦</span> Works offline</div>
+      <div class="trust-badge"><span>✦</span> 100% free</div>
+      <div class="trust-badge"><span>✦</span> Made for India 🇮🇳</div>
+    </div>
+  </header>
+
+  <!-- TOOLS SHOWCASE -->
+  <main class="container tools-showcase">
+    
+    <!-- Tool 1: Resume Builder / PDF Merger -->
+    <section class="tool-section fade-in-up-scroll" id="pdf-resume-tool">
+      <div class="tool-info">
+        <span class="section-label">TOOL 01</span>
+        <h2 class="tool-headline">Drag-and-drop PDF merger + professional resume builder</h2>
+        <p class="tool-desc">Combine multiple PDF documents in your desired order or quickly generate a clean, industry-standard resume. All calculations and generation happen entirely inside your browser—your files never touch any server.</p>
+        <ul class="tool-bullets">
+          <li><i class="ti ti-circle-check"></i> Upload multiple PDFs</li>
+          <li><i class="ti ti-circle-check"></i> Reorder pages with ease</li>
+          <li><i class="ti ti-circle-check"></i> Export in one click</li>
+          <li><i class="ti ti-circle-check"></i> Clean resume formatting</li>
+        </ul>
+      </div>
+
+      <div class="tool-preview-card">
+        <!-- Interactive Tabs -->
+        <div class="tool-tabs">
+          <button class="tab-btn active" data-tab="tab-pdf">PDF Merger</button>
+          <button class="tab-btn" data-tab="tab-resume">Resume Builder</button>
+        </div>
+
+        <!-- PDF Merger Panel -->
+        <div class="tab-panel active" id="tab-pdf">
+          <div class="drag-drop-zone" id="pdf-drag-zone">
+            <i class="ti ti-upload"></i>
+            <span>Drop PDFs here or click to upload</span>
+            <p>Supports .pdf files up to 20MB</p>
+            <input type="file" id="pdf-file-input" class="file-input" multiple accept="application/pdf">
+          </div>
+          <ul class="pdf-file-list" id="pdf-file-list">
+            <!-- Dynamically populated files -->
+          </ul>
+          <div class="pdf-merge-actions">
+            <button class="btn btn-secondary" id="btn-clear-pdf" style="display: none;">Clear</button>
+            <button class="btn btn-primary" id="btn-merge-pdf" disabled>
+              <i class="ti ti-git-merge"></i> Merge PDFs
+            </button>
+          </div>
+        </div>
+
+        <!-- Resume Builder Panel -->
+        <div class="tab-panel" id="tab-resume">
+          <div class="resume-form-scroll">
+            <!-- Section: Personal Info -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="res-name">Full Name</label>
+                <input type="text" id="res-name" class="input-field" placeholder="e.g. Aarav Sharma">
+              </div>
+              <div class="form-group">
+                <label for="res-title">Job Title</label>
+                <input type="text" id="res-title" class="input-field" placeholder="e.g. Full Stack Developer">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="res-email">Email Address</label>
+                <input type="email" id="res-email" class="input-field" placeholder="e.g. aarav@example.com">
+              </div>
+              <div class="form-group">
+                <label for="res-phone">Phone Number</label>
+                <input type="text" id="res-phone" class="input-field" placeholder="e.g. +91 98765 43210">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="res-location">Location</label>
+                <input type="text" id="res-location" class="input-field" placeholder="e.g. Mumbai, India">
+              </div>
+              <div class="form-group">
+                <label for="res-website">Website/Portfolio</label>
+                <input type="text" id="res-website" class="input-field" placeholder="e.g. github.com/aarav">
+              </div>
+            </div>
+            
+            <!-- Section: Profile summary -->
+            <div class="form-group">
+              <label for="res-summary">Professional Summary</label>
+              <textarea id="res-summary" class="textarea-field" placeholder="Briefly describe your expertise and career goals..."></textarea>
+            </div>
+
+            <!-- Section: Experience -->
+            <div class="form-group">
+              <label for="res-experience">Work Experience (Format: Company | Role | Period | Accomplishments)</label>
+              <textarea id="res-experience" class="textarea-field" placeholder="TCS | Senior Developer | 2023 - Present&#10;- Led a team of 4 to deploy cloud native APIs.&#10;- Optimized queries, reducing latency by 40%."></textarea>
+            </div>
+
+            <!-- Section: Education -->
+            <div class="form-group">
+              <label for="res-education">Education (Format: Degree | University | Year)</label>
+              <textarea id="res-education" class="textarea-field" placeholder="B.Tech in Computer Science | IIT Bombay | 2019 - 2023"></textarea>
+            </div>
+
+            <!-- Section: Skills -->
+            <div class="form-group">
+              <label for="res-skills">Skills (Comma separated)</label>
+              <input type="text" id="res-skills" class="input-field" placeholder="JavaScript, Node.js, React, Python, Docker">
+            </div>
+          </div>
+          <div class="pdf-merge-actions">
+            <button class="btn btn-primary" id="btn-generate-resume">
+              <i class="ti ti-download"></i> Generate Resume PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool 2: GST Invoice Calculator -->
+    <section class="tool-section reversed fade-in-up-scroll" id="gst-calculator-tool">
+      <div class="tool-preview-card">
+        <div class="resume-form-scroll" style="max-height: 480px;">
+          <h4 style="font-size: 16px; margin-bottom: 16px; font-family: var(--font-body);">Invoice Details</h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="gst-seller-name">Your Business Name</label>
+              <input type="text" id="gst-seller-name" class="input-field" value="Freelance Dev Studio">
+            </div>
+            <div class="form-group">
+              <label for="gst-seller-gst">Your GSTIN (Optional)</label>
+              <input type="text" id="gst-seller-gst" class="input-field" placeholder="27AAAAA1111A1Z1">
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: 12px;">
+            <div class="form-group">
+              <label for="gst-buyer-name">Client Business Name</label>
+              <input type="text" id="gst-buyer-name" class="input-field" value="Acme India Pvt Ltd">
+            </div>
+            <div class="form-group">
+              <label for="gst-buyer-gst">Client GSTIN (Optional)</label>
+              <input type="text" id="gst-buyer-gst" class="input-field" placeholder="27BBBBB2222B2Z2">
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+            <label style="font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Line Items</label>
+            <button class="btn btn-secondary" id="btn-gst-add-item" style="padding: 4px 12px; font-size: 12px;">
+              <i class="ti ti-plus"></i> Add Item
+            </button>
+          </div>
+
+          <div class="gst-items-container" id="gst-items-container">
+            <!-- GST Line items row loaded dynamically -->
+          </div>
+
+          <div class="form-group" style="margin-top: 16px;">
+            <label>Tax Structure</label>
+            <div class="tax-toggle-group">
+              <button class="tax-toggle-btn active" id="btn-tax-intra" data-type="intra">Intrastate (CGST + SGST)</button>
+              <button class="tax-toggle-btn" id="btn-tax-inter" data-type="inter">Interstate (IGST)</button>
+            </div>
+          </div>
+
+          <!-- Invoice Calculation Output Sheet -->
+          <div class="gst-receipt">
+            <div class="receipt-row">
+              <span>Taxable Value (Subtotal)</span>
+              <span id="gst-receipt-subtotal">₹0.00</span>
+            </div>
+            <div class="receipt-row" id="row-cgst">
+              <span>CGST</span>
+              <span id="gst-receipt-cgst">₹0.00</span>
+            </div>
+            <div class="receipt-row" id="row-sgst">
+              <span>SGST</span>
+              <span id="gst-receipt-sgst">₹0.00</span>
+            </div>
+            <div class="receipt-row" id="row-igst" style="display: none;">
+              <span>IGST</span>
+              <span id="gst-receipt-igst">₹0.00</span>
+            </div>
+            <div class="receipt-row total">
+              <span>Total Invoice Value</span>
+              <span id="gst-receipt-total">₹0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pdf-merge-actions" style="margin-top: 16px;">
+          <button class="btn btn-primary" id="btn-download-invoice">
+            <i class="ti ti-file-download"></i> Download Invoice PDF
+          </button>
+        </div>
+      </div>
+
+      <div class="tool-info">
+        <span class="section-label">TOOL 02</span>
+        <h2 class="tool-headline">GST-compliant invoices in seconds</h2>
+        <p class="tool-desc">Quickly compute correct taxes for contracts, freelancing, and commerce. Choose between Intrastate (CGST + SGST split) and Interstate (IGST) formats. Output is beautifully customized in Indian Rupee format, and prints directly to clean PDFs.</p>
+        <ul class="tool-bullets">
+          <li><i class="ti ti-circle-check"></i> GSTIN validation helper</li>
+          <li><i class="ti ti-circle-check"></i> CGST / SGST / IGST auto-split</li>
+          <li><i class="ti ti-circle-check"></i> Clean INR formatting</li>
+          <li><i class="ti ti-circle-check"></i> Professional PDF output</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Tool 3: JSON Formatter -->
+    <section class="tool-section fade-in-up-scroll" id="json-formatter-tool">
+      <div class="tool-info">
+        <span class="section-label">TOOL 03</span>
+        <h2 class="tool-headline">Format, minify, and validate JSON instantly</h2>
+        <p class="tool-desc">An offline, high-performance editor workspace for developers. Standardize messy configuration files, check for trailing commas, copy clean code outputs in one click, and isolate parsing issues with explicit syntax coloring.</p>
+        <ul class="tool-bullets">
+          <li><i class="ti ti-circle-check"></i> Real-time color syntax highlighting</li>
+          <li><i class="ti ti-circle-check"></i> One-click Minify / Beautify</li>
+          <li><i class="ti ti-circle-check"></i> Clear error and character pointers</li>
+          <li><i class="ti ti-circle-check"></i> Copy validation status</li>
+        </ul>
+      </div>
+
+      <div class="tool-preview-card">
+        <div class="editor-mockup">
+          <div class="editor-header">
+            <span style="font-weight:600; font-size: 13px; color: var(--text-muted);"><i class="ti ti-code"></i> JSON EDITOR</span>
+            <div class="validation-status empty" id="json-status">
+              <i class="ti ti-circle"></i> Ready
+            </div>
+          </div>
+          
+          <div class="editor-workspace">
+            <textarea id="json-input" class="editor-textarea" placeholder='Paste your raw JSON here...&#10;e.g. {"name":"DevKit India","city":"Mumbai","features":["Offline","Free","GST"]}' spellcheck="false"></textarea>
+            <div id="json-preview" class="editor-preview">Output will appear here with syntax colors...</div>
+          </div>
+
+          <div class="editor-actions">
+            <button class="btn btn-primary" id="btn-json-format" style="padding: 6px 14px; font-size: 13px;">
+              <i class="ti ti-align-left"></i> Format
+            </button>
+            <button class="btn btn-secondary" id="btn-json-minify" style="padding: 6px 14px; font-size: 13px;">
+              <i class="ti ti-arrows-minimize"></i> Minify
+            </button>
+            <button class="btn btn-secondary" id="btn-json-copy" style="padding: 6px 14px; font-size: 13px;">
+              <i class="ti ti-copy"></i> Copy Output
+            </button>
+            <button class="btn btn-secondary" id="btn-json-clear" style="padding: 6px 14px; font-size: 13px; margin-left: auto; border-color: rgba(255, 85, 85, 0.2); color: #FF8888;">
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works fade-in-up-scroll">
+      <span class="section-label">HOW IT WORKS</span>
+      <h2>Three steps. That's it.</h2>
+      
+      <div class="steps-grid">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-ghost-num">01</div>
+          <div class="card-icon">
+            <i class="ti ti-apps"></i>
+          </div>
+          <h3 class="card-title">1. Pick a tool</h3>
+          <p class="card-desc">Select PDF merging, professional resume creation, GST calculators, or code editors from the dashboard.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-ghost-num">02</div>
+          <div class="card-icon">
+            <i class="ti ti-edit"></i>
+          </div>
+          <h3 class="card-title">2. Enter details</h3>
+          <p class="card-desc">Input items, business codes, upload local PDFs or insert raw configuration code without limits.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-ghost-num">03</div>
+          <div class="card-icon">
+            <i class="ti ti-download"></i>
+          </div>
+          <h3 class="card-title">3. Export files</h3>
+          <p class="card-desc">Save calculated GST sheets, compiled resumes, minified configs or combined PDF packs client-side.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY DEVKIT INDIA -->
+    <section class="why-section fade-in-up-scroll">
+      <span class="section-label">WHY US</span>
+      <h2>Why developers choose us</h2>
+      
+      <div class="why-grid">
+        <!-- Benefit 1 -->
+        <div class="why-card">
+          <div class="card-icon">
+            <i class="ti ti-user-off"></i>
+          </div>
+          <div class="why-content">
+            <h3>No account needed</h3>
+            <p>Open the browser, start working. No email, no password required. 100% friction-free.</p>
+          </div>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="why-card">
+          <div class="card-icon">
+            <i class="ti ti-file-check"></i>
+          </div>
+          <div class="why-content">
+            <h3>GST-compliant output</h3>
+            <p>CGST, SGST, IGST — auto-calculated for Indian businesses. Export professional print layouts.</p>
+          </div>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="why-card">
+          <div class="card-icon">
+            <i class="ti ti-device-laptop"></i>
+          </div>
+          <div class="why-content">
+            <h3>Works everywhere</h3>
+            <p>Mobile, tablet, desktop. Fully responsive, offline-capable, using local browser compute power.</p>
+          </div>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="why-card">
+          <div class="card-icon">
+            <i class="ti ti-building-monument"></i>
+          </div>
+          <div class="why-content">
+            <h3>Built for India</h3>
+            <p>Indian Rupee format, custom tax codes, local calculations, zero subscription fees ever.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <div class="footer-saffron-line"></div>
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <span class="logo-dev">DevKit</span><span class="logo-india">India</span>
+          </a>
+          <p>Free, offline-first browser utilities for developers, freelancers, and small businesses across India.</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#pdf-resume-tool">Resume & PDF Tool</a></li>
+            <li><a href="#gst-calculator-tool">GST Calculator</a></li>
+            <li><a href="#json-formatter-tool">JSON Formatter</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-socials">
+          <h4>Connect</h4>
+          <div class="social-icons">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+              <i class="ti ti-brand-github"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Twitter">
+              <i class="ti ti-brand-x"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <span>© 2025 DevKit India · Built with ❤️ in India</span>
+        <span>No login required · Fully Offline-Capable</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Load PDF-Lib for Client-Side PDF Merging -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <!-- Load html2pdf for Client-Side Invoice/Resume PDF Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
+  <script src="script.js"></script>
+</body>
+</html>
